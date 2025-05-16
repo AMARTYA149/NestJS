@@ -12,7 +12,6 @@ import { Request } from 'express';
 @Controller('/user')
 export class UserController {
 
-
   @Get()
   getUser(): object {
     return {
