@@ -18,23 +18,18 @@ export class UserService {
   }
 
   create(createUserDto: CreateUserDTO) {
-    return createUserDto;
+    return this.usersRepository.save(createUserDto);
   }
 
   update(updateUserDTO: UpdateUserDTO, userId: number) {
-    return {
-      body: updateUserDTO,
-      userId,
-    };
+    return this.usersRepository.update(userId, updateUserDTO);
   }
 
-  show(param: number) {
-    return {
-      userid: param,
-    };
+  show(userId: number) {
+    return this.usersRepository.findOne({ where: { id: userId } });
   }
 
   deleteUserId(userId: number) {
-    return { userId };
+    return this.usersRepository.delete(userId);
   }
 }
