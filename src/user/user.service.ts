@@ -2,14 +2,19 @@ import { Injectable } from '@nestjs/common';
 import { Request } from 'express';
 import { UpdateUserDTO } from './dto/update-user.dto';
 import { CreateUserDTO } from './dto/create-user.dto copy';
+import { InjectRepository } from '@nestjs/typeorm';
+import { User } from './entity/user.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class UserService {
-  get() {
-    return {
-      name: 'Amartya A',
-      email: 'amartya@gmail.com',
-    };
+  constructor(
+    @InjectRepository(User)
+    private usersRepository: Repository<User>,
+  ) {}
+
+  get(): Promise<User[]> {
+    return this.usersRepository.find();
   }
 
   create(createUserDto: CreateUserDTO) {
@@ -23,7 +28,7 @@ export class UserService {
     };
   }
 
-  getOneUser(param: number) {
+  show(param: number) {
     return {
       userid: param,
     };

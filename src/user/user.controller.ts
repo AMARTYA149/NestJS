@@ -28,8 +28,8 @@ export class UserController {
   }
 
   @Get('/:userId')
-  getUserIdDetails(@Param('userId', ParseIntPipe) userId: number) {
-    return this.userService.getOneUser(userId);
+  getUser(@Param('userId', ParseIntPipe) userId: number) {
+    return this.userService.show(userId);
   }
 
   @Patch('/:userId')
